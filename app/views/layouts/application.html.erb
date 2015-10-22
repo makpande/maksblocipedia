@@ -1,5 +1,7 @@
 <!DOCTYPE html>
  <html>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
  <head>
    <title>Blocipedia</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,13 +11,21 @@
  </head>
  <body>
    <div class="container">
-     <ul>
-       <li><%= link_to "Home", welcome_index_path %></li>
+     <ul class="nav nav-tabs">
+       <li><%= link_to "Blocipedia", welcome_index_path %></li>
+       <li><%= link_to "Wikis", welcome_index_path %></li>
        <li><%= link_to "About", welcome_about_path %></li>
-     </ul>
-
+       <div class="pull-right user-info">
+        <% if user_signed_in? %>
+          Hello <strong><%= link_to current_user.name, edit_user_registration_path %></strong> |
+          - <%= link_to "Sign Out", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <% else %>
+          <%= link_to "Sign Up", new_user_registration_path, :class => 'navbar-link'  %> -
+          <%= link_to "Sign In", new_user_session_path, :class => 'navbar-link'  %>
+        <% end %>
+      </div>
+    </ul>
      <%= yield %>
   </div>
-
  </body>
  </html>
