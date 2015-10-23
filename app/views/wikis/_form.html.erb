@@ -1,0 +1,21 @@
+<%= form_for @wikis do |f| %>
+
+  <%= form_group_tag(wiki.errors[:title]) do %>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki name" %>
+  <% end %>
+
+  <%= form_group_tag(wiki.errors[:body]) do %>
+    <%= f.label :body %>
+    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki description" %>
+  <% end %>
+
+  <%= form_group_tag(wiki.errors[:private]) do %>
+    <%= f.label :private, class: 'checkbox' %>
+    <%= f.check_box :private %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  </div>
+<% end %>
