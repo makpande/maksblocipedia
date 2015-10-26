@@ -9,7 +9,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wikis = Wiki.new(params.require(:wiki).permit(:title, :body))
+    @wikis = Wiki.new(wiki_params)
     if @wikis.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wikis
@@ -30,7 +30,7 @@ class WikisController < ApplicationController
   def update
     @wikis = Wiki.find(params[:id])
 
-    if @wikis.update_attributes(params.require(:wiki).permit(:title, :body))
+    if @wikis.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
       redirect_to @wikis
     else
@@ -49,6 +49,12 @@ class WikisController < ApplicationController
       flash[:error] = "There was an error deleting the topic."
       render :show
     end
+  end
+
+  private
+
+  def wiki_params
+    params.require(:wiki).permit(:title, :body, :private)
   end
 
 end
