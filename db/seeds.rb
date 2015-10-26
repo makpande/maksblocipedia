@@ -30,7 +30,12 @@ admin = User.new(
   )
   admin.save!
 
+<<<<<<< HEAD
   #create a member
+=======
+  #Create member User
+
+>>>>>>> seeding_data
   admin = User.new(
     name: 'Member',
     email: 'member@example.com',
