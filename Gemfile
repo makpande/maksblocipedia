@@ -13,6 +13,7 @@ gem "pundit" #for user define roles
 gem 'devise' #for user login
 gem 'faker' #for fake data
 gem 'figaro' #for storing confidential information
+gem 'pry'
 
 group :development do
   gem 'sqlite3'
