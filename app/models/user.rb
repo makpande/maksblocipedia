@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
     role == 'admin'
   end
 
-  def premium?
-    role == 'premium'
+  def member?
+    role == 'member'
   end
 end
