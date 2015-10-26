@@ -9,6 +9,7 @@ group :production do
 end
 
 # Use sqlite3 as the database for Active Record
+gem "pundit" #for user define roles
 gem 'devise' #for user login
 gem 'faker' #for fake data
 gem 'figaro' #for storing confidential information

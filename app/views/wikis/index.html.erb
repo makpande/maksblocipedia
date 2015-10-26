@@ -14,7 +14,7 @@
              <%= link_to wiki.title, wiki %>
           </h4>
              <small>
-               Created by: <%= current_user.name %> <%= time_ago_in_words(wiki.created_at) %> ago,
+               Created by: <%= wiki.user.name %> <%= time_ago_in_words(wiki.created_at) %> ago,
                <br/>
              </small>
              <h5><%= wiki.body %></h5>
