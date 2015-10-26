@@ -26,8 +26,19 @@ admin = User.new(
   name: 'Admin',
   email: 'admin@example.com',
   password: 'helloworld',
+  role: 'admin'
   )
   admin.save!
+
+  #Create member User
+
+  admin = User.new(
+    name: 'Member',
+    email: 'member@example.com',
+    password: 'helloworld',
+    role: 'member'
+    )
+    admin.save!
 
  puts "Seed finished"
  puts "#{User.count} users created"
