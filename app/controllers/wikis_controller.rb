@@ -2,14 +2,17 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki.all
+    authorize @wikis
   end
 
   def new
     @wikis = Wiki.new
+    authorize @wikis
   end
 
   def create
-    @wikis = Wiki.new(wiki_params)
+    @wikis = current_user.wikis.build(wiki_params)
+    authorize @wikis
     if @wikis.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wikis
@@ -25,10 +28,12 @@ class WikisController < ApplicationController
 
   def edit
     @wikis = Wiki.find(params[:id])
+    authorize @wikis
   end
 
   def update
     @wikis = Wiki.find(params[:id])
+    authorize @wikis
 
     if @wikis.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
