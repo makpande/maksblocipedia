@@ -4,7 +4,9 @@
    <div class="col-md-8">
      <% if current_user %>
      <div class="col-md-4">
-       <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-success' %>
+       <% if policy(Wiki.new).create? %>
+        <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary' %>
+       <% end %>
      </div>
      <% end %><br /><br />
      <% @wikis.each do | wiki | %>

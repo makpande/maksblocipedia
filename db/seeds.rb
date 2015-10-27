@@ -32,7 +32,7 @@ admin = User.create(
   admin.save!
 
 
-  admin = User.create(
+  member = User.create(
     name: 'Member',
     email: 'member@example.com',
     password: 'helloworld',

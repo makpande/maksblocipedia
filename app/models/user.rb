@@ -30,11 +30,30 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          has_many :wikis
 
-  def admin?
-    role == 'admin'
-  end
+   before_create :set_default_role
 
-  def member?
-    role == 'member'
-  end
+   def admin?
+     role == 'admin'
+   end
+
+   def premium?
+     role == 'premium'
+   end
+
+   def basic?
+     role == 'basic'
+   end
+
+   def upgrade_acct
+     self.update_attributes(role: 'premium')
+   end
+
+   def downgrade_acct
+     self.update_attributes(role: 'basic')
+   end
+
+   private
+   def set_default_role
+     self.role||= 'basic'
+   end
 end

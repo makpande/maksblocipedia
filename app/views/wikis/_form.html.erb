@@ -13,9 +13,9 @@
   <%= form_group_tag(wiki.errors[:private]) do %>
     <%= f.label :private, class: 'checkbox' %>
     <%= f.check_box :private %>
-  <% end %>
+  <% end %><br />
 
   <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
+    <%= f.submit "Save", class: 'btn btn-primary' %>
   </div>
 <% end %>

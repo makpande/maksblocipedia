@@ -2,5 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .jumbotron {
-width: 70%;
+width: 100%;
+}
+
+
+.panel-body {
+  background: #FFCCCC;
+}
+
+.price {
+font-size: 500%;
+font-weight: bold;
+color: #5F1313;
+
+}
+
+.price_text {
+font-size: 150%;
+position: relative; top: -2em;
+color: #5F1313;
+}
+
+.vertical_center {
+position: relative; top: -1.75em;
+color: #5F1313;
+}
+
+.list {
+font-size: 130%;
 }
