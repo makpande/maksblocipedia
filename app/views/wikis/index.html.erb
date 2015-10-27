@@ -10,8 +10,7 @@
      </div>
      <% end %><br /><br />
      <% @wikis.each do | wiki | %>
-      <% if (!wiki.private? || (wiki.private? && current_user.id == wiki.user_id) || current_user.admin?) %>
-       <div class="media">
+         <div class="media">
          <div class="media-body">
            <h4 class="media-heading">
              <%= link_to wiki.title, wiki %>
@@ -30,6 +29,5 @@
           </h4>
          </div>
        </div>
-       <% end %>
    </div>
  </div>
