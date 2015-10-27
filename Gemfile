@@ -9,10 +9,11 @@ group :production do
 end
 
 # Use sqlite3 as the database for Active Record
+gem 'stripe' #for payment gateway
 gem "pundit" #for user define roles
 gem 'devise' #for user login
 gem 'faker' #for fake data
-gem 'figaro' #for storing confidential information
+gem 'figaro', '1.0' #for storing confidential information
 gem 'pry'
 
 group :development do
