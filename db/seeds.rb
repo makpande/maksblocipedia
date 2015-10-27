@@ -22,24 +22,21 @@ wikis = Wiki.all
 end
 
 # Create an admin user
-admin = User.new(
+admin = User.create(
   name: 'Admin',
   email: 'admin@example.com',
   password: 'helloworld',
+  password_confirmation: 'helloworld',
   role: 'admin'
   )
   admin.save!
 
-<<<<<<< HEAD
-  #create a member
-=======
-  #Create member User
 
->>>>>>> seeding_data
-  admin = User.new(
+  admin = User.create(
     name: 'Member',
     email: 'member@example.com',
     password: 'helloworld',
+    password_confirmation: 'helloworld',
     role: 'member'
     )
     admin.save!
