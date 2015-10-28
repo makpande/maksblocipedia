@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   resources :charges, only: [:new, :create, :update]
 
   resources :wikis
-  devise_for :users
+  devise_for :users, controllers: {
+        sessions: 'users/sessions'
+      }
+  
   get 'welcome/index'
 
   get 'welcome/about'
