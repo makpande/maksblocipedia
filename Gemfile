@@ -15,6 +15,7 @@ gem 'devise' #for user login
 gem 'faker' #for fake data
 gem 'figaro', '1.0' #for storing confidential information
 gem 'pry'
+gem 'redcarpet'
 
 group :development do
   gem 'sqlite3'

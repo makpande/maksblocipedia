@@ -1,5 +1,40 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+
+      <div class="panel-body">
+      <h4>Membership Status</h4>
+        <div class="form-group">
+          <div class="row">
+
+            <% if current_user.premium? %>
+              <div class="col-md-8">
+                <p class="text-warning">Premium Member</p>
+              </div>
+              <div class="col-md-4">
+                <%= link_to "Cancel Premium Membership", new_charge_path, class: 'btn btn-info' %>
+              </div>
+
+            <% elsif current_user.admin? %>
+              <div class="col-md-8">
+                <p class="text-danger">Administrator</p>
+              </div>
+            <% else %>
+              <div class="col-md-7">
+                <p class="text-danger">Standard Membership</p>
+              </div>
+              <div class="col-md-3">
+                <%= link_to "Upgrade To Premium Membership", new_charge_path, class: 'btn btn-info' %>
+              </div>
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
@@ -7,7 +42,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>
-  
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
