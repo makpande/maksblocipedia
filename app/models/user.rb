@@ -25,9 +25,9 @@
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  #  :lockable, :timeoutable and :omniauthable
+  #  :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+         :recoverable, :rememberable, :trackable, :validatable
          has_many :wikis
 
    before_create :set_default_role
@@ -46,10 +46,12 @@ class User < ActiveRecord::Base
 
    def upgrade_acct
      self.update_attributes(role: 'premium')
+     self.wikis.where(private: false).update_all(private: true)
    end
 
    def downgrade_acct
      self.update_attributes(role: 'basic')
+     self.wikis.where(private: true).update_all(private: false)
    end
 
    private
