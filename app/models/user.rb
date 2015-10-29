@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
    end
 
    def basic?
-     role == 'basic'
+     role == 'standard'
    end
 
    def upgrade_acct
@@ -50,12 +50,12 @@ class User < ActiveRecord::Base
    end
 
    def downgrade_acct
-     self.update_attributes(role: 'basic')
+     self.update_attributes(role: 'standard')
      self.wikis.where(private: true).update_all(private: false)
    end
 
    private
    def set_default_role
-     self.role||= 'basic'
+     self.role||= 'standard'
    end
 end
