@@ -18,7 +18,7 @@
                 <% if wiki.private? %>
                   <span class="badge"> Private</span>
                 <% end %>
-               <h5><%= wiki.body %>
+               <h5> <%= markdown_to_html wiki.body %>
                  <% if (current_user == wiki.user) %>
                     <small>
                       <%= link_to "Delete", wiki, method: :delete, data: {confirm: 'Are you sure you want to delete this Wiki?'} %>
