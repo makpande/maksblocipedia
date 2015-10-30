@@ -24,6 +24,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    @collaborators = Collaborator.all
   end
 
   def edit

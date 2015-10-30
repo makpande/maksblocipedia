@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
 
-  resources :charges, only: [:new, :create, :update]
 
   resources :wikis
+  resources :charges, only: [:new, :create, :update]
+  resources :collaborators, only: [:create, :destroy]
+
   devise_for :users, controllers: {
         sessions: 'users/sessions'
       }
-  
+
+  get 'downgrade' => 'charges#update'
+
   get 'welcome/index'
 
   get 'welcome/about'

@@ -15,11 +15,9 @@
            <div class="media-body">
              <h4 class="media-heading">
                <%= link_to wiki.title, wiki %>
-
                 <% if wiki.private? %>
                   <span class="badge"> Private</span>
                 <% end %>
-
                <h5><%= wiki.body %>
                  <% if (current_user == wiki.user) %>
                     <small>

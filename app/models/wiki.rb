@@ -15,4 +15,12 @@ class Wiki < ActiveRecord::Base
   belongs_to :user
   scope :visible_to, -> (user) { user ? all : where(private: false) }
   default_scope { order('created_at DESC') }
+
+  def collaborators
+    Collaborator.where(wiki_id: id)
+  end
+
+  def users
+    collaborators.users
+  end
 end
