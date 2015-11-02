@@ -1,5 +1,8 @@
 class Collaborator < ActiveRecord::Base
 
+  has_many :user
+  belongs_to :wiki
+
   def self.users
     User.where(id: pluck(:user_id))
   end
@@ -11,9 +14,8 @@ class Collaborator < ActiveRecord::Base
   def user
     User.find(user_id)
   end
-  
+
   def wiki
     Wiki.find(wiki_id)
   end
-
 end

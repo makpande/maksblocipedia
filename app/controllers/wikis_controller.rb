@@ -1,21 +1,21 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.visible_to(current_user).all
-    authorize @wikis
+    # @wikis = Wiki.visible_to(current_user).all
+    @wikis = policy_scope(Wiki)
   end
 
   def new
-    @wikis = Wiki.new
-    authorize @wikis
+    @wiki = Wiki.new
+    authorize @wiki
   end
 
   def create
-    @wikis = current_user.wikis.build(wiki_params)
-    authorize @wikis
-    if @wikis.save
+    @wiki = current_user.wikis.build(wiki_params)
+    authorize @wiki
+    if @wiki.save
       flash[:notice] = "Wiki was saved."
-      redirect_to @wikis
+      redirect_to @wiki
     else
       flash[:error] = "There was an error saving the post.  Please try again."
       render :new
@@ -24,21 +24,24 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
-    @collaborators = Collaborator.all
+    authorize @wiki
   end
 
   def edit
-    @wikis = Wiki.find(params[:id])
-    authorize @wikis
+    @wiki = Wiki.find(params[:id])
+    @collaborators = @wiki.collaborators
+    @collaborator = Collaborator.new
+    @users = User.all.to_a.reject!{|x| @collaborators.users.include?(x) || @wiki.user == x}
+    authorize @wiki
   end
 
   def update
-    @wikis = Wiki.find(params[:id])
-    authorize @wikis
+    @wiki = Wiki.find(params[:id])
+    authorize @wiki
 
-    if @wikis.update_attributes(wiki_params)
+    if @wiki.update_attributes(wiki_params)
       flash[:notice] = "Wiki was updated."
-      redirect_to @wikis
+      redirect_to @wiki
     else
       flash[:error] = "There was an error saving the Wiki.  Please try again."
       render :edit
@@ -46,11 +49,11 @@ class WikisController < ApplicationController
   end
 
   def destroy
-    @wikis = Wiki.find(params[:id])
-    @wikis.authorize
+    @wiki = Wiki.find(params[:id])
+    @wiki.authorize
 
-    if @wikis.destroy
-      flash[:notice] = "The \"#{@wikis.title}\" Wiki was deleted successfully."
+    if @wiki.destroy
+      flash[:notice] = "The \"#{@wiki.title}\" Wiki was deleted successfully."
       redirect_to wikis_path
     else
       flash[:error] = "There was an error deleting the topic."

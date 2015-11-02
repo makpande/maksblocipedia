@@ -54,15 +54,7 @@ class User < ActiveRecord::Base
      self.wikis.where(private: true).update_all(private: false)
    end
 
-   def collaborations
-    Collaborator.where(user_id: id)
-  end
-
-  def wikis
-    collaborators.wikis
-  end
-  
-   private
+  private
    def set_default_role
      self.role||= 'standard'
    end
