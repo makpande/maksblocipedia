@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
          has_many :wikis
-         has_many :collaborators
+         has_many :collaborators, dependent: :destroy
    before_create :set_default_role
 
    def admin?
@@ -54,14 +54,14 @@ class User < ActiveRecord::Base
      self.wikis.where(private: true).update_all(private: false)
    end
 
-   def collaborations
-    Collaborator.where(user_id: id)
+   def collaborators(wikis)
+    Collaborator.where(wiki_id: wiki_id).first
   end
 
   def wikis
     collaborators.wikis
   end
-  
+
    private
    def set_default_role
      self.role||= 'standard'

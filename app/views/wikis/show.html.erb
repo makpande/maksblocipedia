@@ -11,7 +11,7 @@
     <h5><%= markdown_to_html @wiki.body %></h5>
     <% if (current_user == @wiki.user) %>
        <small>
-         <%= link_to "Delete", wiki, method: :delete, data: {confirm: 'Are you sure you want to delete this Wiki?'} %>
+         <%= link_to "Delete", @wiki, method: :delete, data: {confirm: 'Are you sure you want to delete this Wiki?'} %>
        </small>
      <% end %>
   </div>

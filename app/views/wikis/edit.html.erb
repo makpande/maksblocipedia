@@ -13,3 +13,29 @@
      <%= render partial: 'form', locals: {wiki: @wikis} %>
    </div>
  </div>
+
+ <div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-8">
+    <% if !@collaborators.blank? %>
+      <h4>Collaborators</h4>
+
+      <% @collaborator.each do |c| %>
+        <p>
+          <%= link_to wiki_collaborator_path(@wiki, c), method: :delete do %>
+            <span class="glyphicon glyphicon-remove-circle"></span>
+          <%end%>
+          <%= c.user.name %>
+        </p>
+      <%end%>
+    <% end %>
+    <br/>
+
+    <%= form_for [@wiki, @collaborators] do |f| %>
+      <h4><%= f.label :user_id, 'Add New Collaborators' %></h4>
+
+      <%= f.submit class: 'btn btn-success' %>
+    <%end%>
+  </div>
+</div>

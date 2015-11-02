@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :wikis do
+    resources :collaborators, only: [:create, :destroy]
+  end
 
-  resources :wikis
   resources :charges, only: [:new, :create, :update]
-  resources :collaborators, only: [:create, :destroy]
+
+
 
   devise_for :users, controllers: {
         sessions: 'users/sessions'

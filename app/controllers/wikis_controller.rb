@@ -1,12 +1,15 @@
 class WikisController < ApplicationController
 
   def index
-    @wikis = Wiki.visible_to(current_user).all
-    authorize @wikis
+    # @wikis = Wiki.visible_to(current_user).all
+    @wikis = policy_scope(Wiki)
+    @public = Wiki.where("private = ?", false)
+
   end
 
   def new
     @wikis = Wiki.new
+    @collaborators = Collaborator.new
     authorize @wikis
   end
 
@@ -29,6 +32,11 @@ class WikisController < ApplicationController
 
   def edit
     @wikis = Wiki.find(params[:id])
+
+    @collaborators = Collaborator.new
+    # @collaborators = @wiki.collaborators
+    # @collaborators = @wiki.collaborators.build(user_id: @user)
+    @users = User.all.to_a.reject!{|x| @collaborators.user.include?(x) || @wiki.user == x}
     authorize @wikis
   end
 
@@ -47,7 +55,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wikis = Wiki.find(params[:id])
-    @wikis.authorize
+    # @wikis.authorize
 
     if @wikis.destroy
       flash[:notice] = "The \"#{@wikis.title}\" Wiki was deleted successfully."
