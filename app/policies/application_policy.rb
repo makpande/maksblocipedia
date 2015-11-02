@@ -49,9 +49,5 @@ class ApplicationPolicy
     def resolve
       scope
     end
-<<<<<<< HEAD
   end
-=======
-  end 
->>>>>>> collaborator
 end
