@@ -3,8 +3,6 @@ class WikisController < ApplicationController
   def index
     # @wikis = Wiki.visible_to(current_user).all
     @wikis = policy_scope(Wiki)
-    @public = Wiki.where("private = ?", false)
-
   end
 
   def new
