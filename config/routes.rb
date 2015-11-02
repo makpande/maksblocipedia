@@ -4,9 +4,19 @@ Rails.application.routes.draw do
     resources :collaborators, only: [:create, :destroy]
   end
 
+<<<<<<< HEAD
   resources :charges, only: [:new, :create, :update]
 
 
+=======
+
+  resources :wikis do
+    resources :collaborators, only: [:create, :destroy]
+  end
+  
+  resources :charges, only: [:new, :create, :update]
+
+>>>>>>> collaborator
 
   devise_for :users, controllers: {
         sessions: 'users/sessions'

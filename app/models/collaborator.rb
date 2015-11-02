@@ -11,6 +11,7 @@ class Collaborator < ActiveRecord::Base
     wiki_id = Wiki.where(id: pluck(:wiki_id))
   end
 
+<<<<<<< HEAD
   # def user
   #   User.find(user_id)
   # end
@@ -19,4 +20,13 @@ class Collaborator < ActiveRecord::Base
   #   Wiki.find(wiki_id)
   # end
 
+=======
+  def user
+    User.find(user_id)
+  end
+
+  def wiki
+    Wiki.find(wiki_id)
+  end
+>>>>>>> collaborator
 end
