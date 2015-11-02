@@ -6,9 +6,9 @@ class WikisController < ApplicationController
   end
 
   def new
-    @wikis = Wiki.new
+    @wiki = Wiki.new
     @collaborators = Collaborator.new
-    authorize @wikis
+    authorize @wiki
   end
 
   def create
